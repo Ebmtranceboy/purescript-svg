@@ -2,16 +2,9 @@ module SVG.Geometry(module SVG.Geometry) where
 
 import Prelude
 import Data.Array(filter)
-import Data.Maybe(Maybe(..),maybe)
-import Data.Foldable(foldr)
+import Data.Maybe(Maybe)
 import Data.Sparse.Polynomial(Polynomial,(^),(?))
---import Graphics.Drawing ( Drawing, closed, fillColor, filled
---                        , lineWidth, outlineColor, outlined
---                        , path, text)
---import Graphics.Drawing (circle, arc) as Drawing
---import Graphics.Drawing.Font (fantasy, font)
---import Color (Color)
-import Math (atan2, cos, pi, sin, sqrt)
+import Math (cos, sin, sqrt)
 
 type PointAttributes = 
   { name :: String
@@ -146,18 +139,20 @@ newtype Arc =
       , center :: Point
       , extremity :: Vector
       , radius :: Number
+      , flag :: Boolean
       , flipped :: Boolean
       , swapped :: Boolean
       , asOriented :: Maybe String}
 
 arc :: Vector -> Point -> Vector -> Number 
-    -> Boolean -> Boolean -> Maybe String 
+    -> Boolean -> Boolean -> Boolean -> Maybe String 
     -> Arc
-arc origin center extremity radius flipped swapped asOriented = 
+arc origin center extremity radius flag flipped swapped asOriented = 
   Arc { origin
       , center
       , extremity
       , radius
+      , flag
       , flipped
       , swapped
       , asOriented}
